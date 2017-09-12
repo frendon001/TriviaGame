@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Pixar Trivia</title>
+	<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed|Titillium+Web" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body class="background-page">
+	<div class="container main-content">
+		<header class="row header-row justify-content-center">
+			<div class="col-md-8 text-center">
+				<h1 class="page-title"> Pixar Trivia</h1>
+			</div>
+		</header>
+		<div class="row details-row justify-content-between">
+			<div class="col-md-2 col-3 question-count-col">
+				<p class="float-right">1 of 25</p>
+			</div>
+			<div class="col-md-3 col-5 timer-col text-center">
+				<p>Time Remaining: <span id="timer"></span></p>
+			</div>
+			<div class="col-md-2 col-3 score-col">
+				<p>Score <span id="score"></span></p>
+			</div>
+		</div>
+		<div class="row text-center justify-content-center trivia-question-row">
+			<div class="col-6 trivia-question-col">
+				<p id="trivia-question">Who voiced Remy in 'Ratatouille'?</p>
+			</div>
+		</div>
+		<div class="row text-center justify-content-center trivia-image-row">
+			<div class="col-8 trivia-image-col">
+				<img class="img-fluid" id="trivia-image" src="http://www3.pictures.crowdleap.com/mp/WyU5WI3qwlxx.jpg"></img>
+			</div>
+		</div>
+		<div class="row justify-content-center trivia-answers-row">
+			<div class="col-6  trivia-answers-col">
+				<ul id="trivia-answers">
+					<!-- Dynamically populate answers here -->
+					<li>David Cross</li>
+					<li>Louis C.K.</li>
+					<li>Tim Allen</li>
+					<li>Patton Oswald</li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="row footer-row no-gutters">
+			<div class="container text-center">
+				<footer class="footer">
+					<span>&copy; Copyright 2017 Fausto Rendon</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="assets/javascript/app.js"></script>
+
+</html>
