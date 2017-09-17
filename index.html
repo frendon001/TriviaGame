@@ -17,31 +17,31 @@
 			</div>
 		</header>
 		<!--START GAME SECTION-->
-		<div id="game-start" class="row justify-content-center align-items-center d-none">
+		<div id="game-start" class="row justify-content-center align-items-center">
 			<!--Prompt-->
-			<p>How well do you know your favorite Pixar movies? Did catch all the easter eggs and subtle references? Do you know all the main characters as well as you think you do?
+			<p>How well do you know your favorite Pixar movies? Did catch all the easter eggs and subtle references? Do you know all the lines of your favorite movie as well as you think you do?
 				<br>
 				<br> Click the <b>Start Game</b> button below to find out!</p>
 			<!--Start button-->
 			<button id="start-btn" class="btn">Start Game</button>
 		</div>
 		<!--COUNTERS AND TIMER-->
-		<div class="row details-row justify-content-between">
+		<div class="row justify-content-between d-none" id="counter-timer">
 			<!--Question counter-->
-			<div class="col-md-2 col-3 question-count-col details-counter">
-				<p class="float-right">1 of 25</p>
+			<div class="col-md-2 col-3 question-count-col counter-row">
+				<p class="float-right"><span id="question-number">1</span> of 20</p>
 			</div>
 			<!--Question timer-->
 			<div class="col-md-3 col-5 timer-col text-center">
 				<p>Time Remaining: <span id="timer"></span></p>
 			</div>
 			<!--Score counter-->
-			<div class="col-md-2 col-3 score-col details-counter">
+			<div class="col-md-2 col-3 score-col tcounter-row">
 				<p>Score <span id="score"></span></p>
 			</div>
 		</div>
 		<!--QUESTION SECTION-->
-		<div class="game-question">
+		<div class="d-none" id="game-question">
 			<!--Question text-->
 			<div class="row text-center justify-content-center trivia-question-row">
 				<div class="col-6 trivia-question-col">
@@ -49,13 +49,13 @@
 				</div>
 			</div>
 			<!--Question image-->
-			<div class="row text-center justify-content-center trivia-image-row">
+			<div class="row text-center justify-content-center trivia-question-row">
 				<div class="col-8 trivia-image-col">
-					<img class="img-fluid trivia-img" id="trivia-question-img" src="http://www3.pictures.crowdleap.com/mp/WyU5WI3qwlxx.jpg"></img>
+					<img class="img-fluid trivia-img" id="trivia-question-img" src="assets/images/question_01.jpg"></img>
 				</div>
 			</div>
 			<!--Question answer options-->
-			<div class="row justify-content-center trivia-question-answers-row">
+			<div class="row justify-content-center trivia-question-row">
 				<div class="col-8  trivia-question-answers-col">
 					<ul id="trivia-question-answers">
 						<!-- Dynamically populate answers here -->
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		<!--ANSWER SECTION-->
-		<div class="game-answer d-none">
+		<div class="d-none" id="game-answer">
 			<!--Result of selected answer-->
 			<div class="row text-center justify-content-center trivia-answer-result">
 				<div class="col-6 ">

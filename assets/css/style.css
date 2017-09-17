@@ -33,7 +33,7 @@ html {
 }
 
 #game-start {
-	height: 45vh;
+	height: 50vh;
 	padding: 25px 30px 25px 30px;
 	font-size: 20px;
 	font-family: 'Titillium Web', sans-serif;
@@ -46,7 +46,7 @@ html {
 	background: #82a7ca;
 	cursor: pointer;
 }
-.details-row {
+#counter-timer-row {
 	margin-bottom: 15px;
 	margin-top: 15px;
 }
