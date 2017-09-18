@@ -5,9 +5,11 @@ var triviaQuestionInterval;
 var triviaGame = {
 	questionNumber: 0,
 	score: 0,
-	questionTime: 10,
+	incorrect: 0,
+	unanswered:0,
+	questionTime: 5,
 	remainingTime: 0,
-	answerDisplayTime: 5000,
+	answerDisplayTime: 2000,
 	gameOver: false,
 	currentQuestion: null,
 	usedQuestionArr: [],
@@ -173,6 +175,18 @@ var triviaGame = {
 		}
 	],
 	nextQuestion: function() {
+				//if game is over display the start over page
+		if (this.gameOver === true) {
+			//hide game answer content
+			$("#game-answer").addClass("d-none");
+			//add game over content
+			$("#game-over").removeClass("d-none");
+			//add game counters
+			$("#game-over-correct").text(this.score);
+			$("#game-over-incorrect").text(this.incorrect);
+			$("#game-over-unanswered").text(this.unanswered);
+		}
+
 		//display the next trivia question if game is not over
 		if (this.gameOver === false) {
 
@@ -219,13 +233,13 @@ var triviaGame = {
 
 			//hide game answer content
 			$("#game-answer").addClass("d-none");
-			//add game question contnet
+			//add game question content
 			$("#game-question").removeClass("d-none");
 			// start the question interval
 			triviaQuestionInterval = setInterval(this.startTimer.bind(this), 1000);
 		}
 
-		//if game is over display the start over page
+
 
 	},
 	showAnswer: function(answer) {
@@ -244,10 +258,14 @@ var triviaGame = {
 			//Show answer result as 'You ran out of time!' and show answer text 
 			$("#answer-result").text("You ran out of time!");
 			$("#answer-text").removeClass("d-none");
+			//increase unanswered counter
+			this.unanswered++;
 		}else if (answer !== this.currentQuestion.answerText) {
 			//Show answer result as Nope! and show answer text
 			$("#answer-result").text("Nope!");
 			$("#answer-text").removeClass("d-none");
+			//increase incorrect counter
+			this.incorrect++;
 		}
 
 		//Show answer result as correct and hide answer text

@@ -23,7 +23,7 @@
 				<br>
 				<br> Click the <b>Start Game</b> button below to find out!</p>
 			<!--Start button-->
-			<button id="start-btn" class="btn">Start Game</button>
+			<button id="start-btn" class="btn start-btn">Start Game</button>
 		</div>
 		<!--COUNTERS AND TIMER-->
 		<div class="row justify-content-between d-none" id="counter-timer">
@@ -87,6 +87,29 @@
 					<img class="img-fluid trivia-img" id="trivia-answer-img" src="http://www3.pictures.crowdleap.com/mp/WyU5WI3qwlxx.jpg"></img>
 				</div>
 			</div>
+		</div>
+		<!--GAME OVER SECTION-->
+		<div class="d-none" id="game-over">
+			<!--Result of selected answer-->
+			<div class="row text-center justify-content-center">
+				<div class="col-6 ">
+					<p>Here is summary of how you did:</p>
+				</div>
+			</div>
+			<!--Correct answer text-->
+			<div class="row text-center justify-content-center">
+				<div class="col-8 ">
+					<p>Correct Answers: <span id="game-over-correct">0</span></p>
+					<p>Incorrect Answers: <span id="game-over-incorrect">0</span></p>
+					<p>Unanswered: <span id="game-over-unanswered">0</span></p>
+					<br>
+					<p>Press the button below to start over!</p>
+					<br>
+					<br>
+					<button id="start-over-btn" class="btn start-btn">Start Over</button>
+				</div>
+			</div>
+
 		</div>
 		<!--FOOTER-->
 		<div class="row footer-row no-gutters">
