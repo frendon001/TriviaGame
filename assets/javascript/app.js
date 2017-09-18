@@ -1,14 +1,13 @@
-//store interval for game
-var triviaCounterInterval;
-
 //store question interval
 var triviaQuestionInterval;
 //http://www.gamesradar.com/50-best-pixar-easter-eggs/
 //create trivia game object to hold game information
 var triviaGame = {
-	questionNumber: 1,
+	questionNumber: 0,
 	score: 0,
-	remainingTime: 10,
+	questionTime: 10,
+	remainingTime: 0,
+	answerDisplayTime: 5000,
 	gameOver: false,
 	currentQuestion: null,
 	usedQuestionArr: [],
@@ -30,10 +29,10 @@ var triviaGame = {
 		},
 		{
 			"question": "What is Hamm's villan name in Andy's western play in Toy Story 3?",
-			"answers": ["Mr. Porkchop", "Dr. Evil", "Mad Dog", "Evil Dr. Porkchop"],
+			"answers": ["Mr. Chop", "Dr. Evil", "Mad Dog", "Evil Dr. Porkchop"],
 			"answerText": "Evil Dr. Porkchop",
 			"questionImg": "assets/images/question_03.jpg",
-			"answerImg": "assets/images/answer_03.jpg",
+			"answerImg": "assets/images/answer_03.jpeg",
 			"id": 3
 		},
 		{
@@ -48,7 +47,7 @@ var triviaGame = {
 			"question": "In 'Finding Dory,' Dory is lucky to find a friend in a grumpy octopus with how many tentacles?",
 			"answers": ["5", "7", "6", "8"],
 			"answerText": "7",
-			"questionImg": "assets/images/question_05.jpg",
+			"questionImg": "assets/images/question_05.jpeg",
 			"answerImg": "assets/images/answer_05.jpg",
 			"id": 5
 		},
@@ -57,7 +56,7 @@ var triviaGame = {
 			"answers": ["Rex", "Slinky", "Hamm", "Shark"],
 			"answerText": "Shark",
 			"questionImg": "assets/images/question_quote.jpg",
-			"answerImg": "assets/images/answer_06.jpg",
+			"answerImg": "assets/images/answer_06.gif",
 			"id": 6
 		},
 		{
@@ -69,7 +68,7 @@ var triviaGame = {
 			"id": 7
 		},
 		{
-			"question": "What is the name of this Pixar lamp as seen in Wall-E's sculpture of Eve?",
+			"question": "What is the name of this iconic Pixar lamp as seen in Wall-E's sculpture of Eve?",
 			"answers": ["Luxo Jr.", "Pixo", "Ello", "Lumos"],
 			"answerText": "Luxo Jr.",
 			"questionImg": "assets/images/question_08.jpg",
@@ -81,7 +80,7 @@ var triviaGame = {
 			"answers": ["Ratatouille", "A Bug's Life", "Partly Cloudy", "UP"],
 			"answerText": "Ratatouille",
 			"questionImg": "assets/images/question_09.jpg",
-			"answerImg": "assets/images/answer_09.jpg",
+			"answerImg": "assets/images/answer_09.png",
 			"id": 9
 		},
 		{
@@ -89,7 +88,7 @@ var triviaGame = {
 			"answers": ["Scully", "Boo", "Mike", "Randall"],
 			"answerText": "Randall",
 			"questionImg": "assets/images/question_10.jpg",
-			"answerImg": "assets/images/answer_10.jpg",
+			"answerImg": "assets/images/answer_10.gif",
 			"id": 10
 		},
 		{
@@ -97,7 +96,7 @@ var triviaGame = {
 			"answers": ["Mr. Mime", "Bomb Voyage", "Le Bom", "Sans Visage"],
 			"answerText": "Bomb Voyage",
 			"questionImg": "assets/images/question_11.jpg",
-			"answerImg": "assets/images/answer_11.jpg",
+			"answerImg": "assets/images/answer_11.jpeg",
 			"id": 11
 		},
 		{
@@ -121,7 +120,7 @@ var triviaGame = {
 			"answers": ["Luxo Ball", "Blink", "Cosmo Jr.", "Inc"],
 			"answerText": "Luxo Ball",
 			"questionImg": "assets/images/question_14.jpg",
-			"answerImg": "assets/images/answer_14.jpg",
+			"answerImg": "assets/images/answer_14.png",
 			"id": 14
 		},
 		{
@@ -133,15 +132,15 @@ var triviaGame = {
 			"id": 15
 		},
 		{
-			"question": "'What a space port!' - Toy Story?",
+			"question": "'What a space port!' - Toy Story",
 			"answers": ["Buzz", "Woody", "Rex", "Andy"],
 			"answerText": "Buzz",
 			"questionImg": "assets/images/question_quote.jpg",
-			"answerImg": "assets/images/answer_16.jpg",
+			"answerImg": "assets/images/answer_16.png",
 			"id": 16
 		},
 		{
-			"question": "What was pixar's second film?",
+			"question": "Which of the following, is Pixar's second film?",
 			"answers": ["The Incredibles", "Cars", "Finding Nemo", "A Bug's Life"],
 			"answerText": "A Bug's Life",
 			"questionImg": "assets/images/question_generic.jpg",
@@ -165,7 +164,7 @@ var triviaGame = {
 			"id": 19
 		},
 		{
-			"question": "'I never look back, darling. It distracts from the now.' –The Incredibles",
+			"question": "'I never look back, darling. It distracts from the now.' - The Incredibles",
 			"answers": ["Edna", "Violet", "Gilbert", "Mrs. Hogenson"],
 			"answerText": "Edna",
 			"questionImg": "assets/images/question_20.jpg",
@@ -177,6 +176,14 @@ var triviaGame = {
 		//display the next trivia question if game is not over
 		if (this.gameOver === false) {
 
+			//check if newQuestion array only has one remaining element
+			//if so, then set game over to true
+
+			console.log(this.newQuestionArr.length);
+
+			if (this.newQuestionArr.length === 1) {
+				this.gameOver = true;
+			}
 
 			//randomly choose a question from the newQuestionArr
 			var randomQuestionIndex = Math.floor(Math.random() * this.newQuestionArr.length);
@@ -191,22 +198,76 @@ var triviaGame = {
 			});
 			console.log(this);
 
-			//Check if game is over, true if newQuestionArr is empty
-			if(this.newQuestionArr.length === 0){
-				gameOver = true;
-			}
+
 
 			//Add randomly selected question content to page
 			$("#trivia-question").text(this.currentQuestion.question);
-			$("#trivia-question-img").attr("src",this.currentQuestion.questionImg);
+			$("#trivia-question-img").attr("src", this.currentQuestion.questionImg);
 
-			var questionAnswers =  this.currentQuestion.answers;
+			var questionAnswers = this.currentQuestion.answers;
 			$("#trivia-question-answers").children().each(function(index) {
-   				$( this ).text(questionAnswers[index]);
-   			});
+				$(this).text(questionAnswers[index]);
+			});
+			//reset timer and update question counter
+			this.remainingTime = this.questionTime;
+			this.questionNumber++;
+
+			//Set Score, Time and Counter variables
+			$("#question-number").text(this.questionNumber);
+			$("#timer").text(this.remainingTime);
+			$("#score").text(this.score);
+
+			//hide game answer content
+			$("#game-answer").addClass("d-none");
+			//add game question contnet
+			$("#game-question").removeClass("d-none");
+			// start the question interval
+			triviaQuestionInterval = setInterval(this.startTimer.bind(this), 1000);
 		}
 
+		//if game is over display the start over page
 
+	},
+	showAnswer: function(answer) {
+		//stop the question interval counter
+		clearInterval(triviaQuestionInterval);
+
+		console.log(answer);
+
+		//Hide all question html from page
+		$("#game-question").addClass("d-none");
+		//Show answer html
+		$("#game-answer").removeClass("d-none");
+
+		var answerString = this.currentQuestion.answerText;
+		if (answer === "timeout") {
+			//Show answer result as 'You ran out of time!' and show answer text 
+			$("#answer-result").text("You ran out of time!");
+			$("#answer-text").removeClass("d-none");
+		}else if (answer !== this.currentQuestion.answerText) {
+			//Show answer result as Nope! and show answer text
+			$("#answer-result").text("Nope!");
+			$("#answer-text").removeClass("d-none");
+		}
+
+		//Show answer result as correct and hide answer text
+		if (answer === answerString) {
+			$("#answer-result").text("Correct!");
+			$("#answer-text").addClass("d-none");
+			//update score counter
+			this.score++;
+			$("#score").text(this.score);
+
+		}
+
+		
+		//populate correct answer text with the answer for the question
+		$("#correct-answer").text(answerString);
+		//Show correct answer image regardless of answer-result
+		$("#trivia-answer-img").attr("src", this.currentQuestion.answerImg);
+
+		//wait a 5 seconds then show next question
+		setTimeout(this.nextQuestion.bind(this), this.answerDisplayTime);
 
 	},
 	startGame: function() {
@@ -216,16 +277,12 @@ var triviaGame = {
 		$("#game-start").addClass("d-none");
 		//add game counter and timer content
 		$("#counter-timer").removeClass("d-none");
-		//add game question contnet
-		$("#game-question").removeClass("d-none");
-		//Set Score, Time and Counter variables
-		$("#question-number").text(this.questionNumber);
-		$("#timer").text(this.remainingTime);
-		$("#score").text(this.score);
-		//add question to trivia page
+
+
+		//Show question and start question timer
 		this.nextQuestion();
 		//start the game counter
-		triviaCounterInterval = setInterval(this.startTimer.bind(this), 1000);
+		//triviaQuestionInterval = setInterval(this.startTimer.bind(this), 1000);
 
 	},
 	startTimer: function() {
@@ -235,17 +292,13 @@ var triviaGame = {
 			this.remainingTime--;
 			$("#timer").text(this.remainingTime);
 		} else {
-			clearInterval(triviaCounterInterval);
+			//display the answer because time ran out
+			//pass string "timeout" to let the answer know no answer was selected
+			this.showAnswer("timeout");
 
 		}
 
 
-	},
-	showAnswer: function() {
-		//hide all question html from page
-		$("#game-question").addClass("d-none");
-		//show answer html
-		$("#game-answer").removeClass("d-none");
 	}
 
 
@@ -253,10 +306,14 @@ var triviaGame = {
 };
 
 
-// Wait for document load before calling/running events
+// Wait for document load before running events
 $(document).ready(function() {
 	//start game when the start game button is clicked
 	$("#start-btn").on("click", triviaGame.startGame.bind(triviaGame));
+	$(".trivia-question-answer-item").on("click", function(){
+		var answer = $(this).text();
+		triviaGame.showAnswer(answer);
+	});
 
 
 });
