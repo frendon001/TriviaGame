@@ -9,7 +9,7 @@ var triviaGame = {
 	unanswered:0,
 	questionTime: 5,
 	remainingTime: 0,
-	answerDisplayTime: 2000,
+	answerDisplayTime: 1000,
 	gameOver: false,
 	currentQuestion: null,
 	usedQuestionArr: [],
@@ -275,10 +275,8 @@ var triviaGame = {
 			//update score counter
 			this.score++;
 			$("#score").text(this.score);
-
 		}
 
-		
 		//populate correct answer text with the answer for the question
 		$("#correct-answer").text(answerString);
 		//Show correct answer image regardless of answer-result
@@ -289,13 +287,10 @@ var triviaGame = {
 
 	},
 	startGame: function() {
-
-
 		//hide the start page content
 		$("#game-start").addClass("d-none");
 		//add game counter and timer content
 		$("#counter-timer").removeClass("d-none");
-
 
 		//Show question and start question timer
 		this.nextQuestion();
@@ -313,13 +308,31 @@ var triviaGame = {
 			//display the answer because time ran out
 			//pass string "timeout" to let the answer know no answer was selected
 			this.showAnswer("timeout");
-
 		}
 
+	},
+	startOver: function(){
+		// reset counters
+		this.score = 0;
+		this.incorrect = 0;
+		this.unanswered = 0;
+		this.questionNumber = 0;
+		this.remainingTime = 0;
 
+		//set game over to false
+		this.gameOver = false;
+
+		//give all used questions back to used questions array
+		this.newQuestionArr = this.usedQuestionArr;
+
+		//empty used questions array
+		this.usedQuestionArr = [];
+
+		//Hide game over page
+		$("#game-over").addClass("d-none");
+
+		this.startGame();
 	}
-
-
 
 };
 
@@ -328,10 +341,13 @@ var triviaGame = {
 $(document).ready(function() {
 	//start game when the start game button is clicked
 	$("#start-btn").on("click", triviaGame.startGame.bind(triviaGame));
+	//show answer once question answer is selected by the player
 	$(".trivia-question-answer-item").on("click", function(){
 		var answer = $(this).text();
 		triviaGame.showAnswer(answer);
 	});
+
+	$("#start-over-btn").on("click", triviaGame.startOver.bind(triviaGame));
 
 
 });
