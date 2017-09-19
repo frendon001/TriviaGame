@@ -7,9 +7,9 @@ var triviaGame = {
 	score: 0,
 	incorrect: 0,
 	unanswered:0,
-	questionTime: 5,
+	questionTime: 10,
 	remainingTime: 0,
-	answerDisplayTime: 1000,
+	answerDisplayTime: 3000,
 	gameOver: false,
 	currentQuestion: null,
 	usedQuestionArr: [],
@@ -22,7 +22,7 @@ var triviaGame = {
 			"id": 1
 		},
 		{
-			"question": "'But I don't wanna use my heaaaaaaaad! - Toy Story 2",
+			"question": "'But I don't wanna use my heaaaaaaaad!' - Toy Story 2",
 			"answers": ["Buzz", "Mr. Potato Head", "Rex", "Hamm"],
 			"answerText": "Rex",
 			"questionImg": "assets/images/question_quote.jpg",
@@ -54,7 +54,7 @@ var triviaGame = {
 			"id": 5
 		},
 		{
-			"question": "'Look at me! I'm Woody! Howdy! Howdy! Howdy! - Toy Story",
+			"question": "'Look at me! I'm Woody! Howdy! Howdy! Howdy!' - Toy Story",
 			"answers": ["Rex", "Slinky", "Hamm", "Shark"],
 			"answerText": "Shark",
 			"questionImg": "assets/images/question_quote.jpg",
@@ -118,7 +118,7 @@ var triviaGame = {
 			"id": 13
 		},
 		{
-			"question": "What is the name of this ball which makes in appearance in all Pixar movies?",
+			"question": "What is the name of this ball which makes an appearance in all Pixar movies?",
 			"answers": ["Luxo Ball", "Blink", "Cosmo Jr.", "Inc"],
 			"answerText": "Luxo Ball",
 			"questionImg": "assets/images/question_14.jpg",
@@ -176,7 +176,7 @@ var triviaGame = {
 	],
 	nextQuestion: function() {
 				//if game is over display the start over page
-		if (this.gameOver === true) {
+		if (this.gameOver) {
 			//hide game answer content
 			$("#game-answer").addClass("d-none");
 			//add game over content
@@ -188,7 +188,7 @@ var triviaGame = {
 		}
 
 		//display the next trivia question if game is not over
-		if (this.gameOver === false) {
+		if (!this.gameOver) {
 
 			//check if newQuestion array only has one remaining element
 			//if so, then set game over to true
@@ -252,26 +252,32 @@ var triviaGame = {
 		$("#game-question").addClass("d-none");
 		//Show answer html
 		$("#game-answer").removeClass("d-none");
+		//remove all classes for anwswer format
+		$("#answer-result").removeClass("correct incorrect unanswered");
+
 
 		var answerString = this.currentQuestion.answerText;
 		if (answer === "timeout") {
 			//Show answer result as 'You ran out of time!' and show answer text 
 			$("#answer-result").text("You ran out of time!");
 			$("#answer-text").removeClass("d-none");
+			$("#answer-result").addClass("unanswered");
 			//increase unanswered counter
 			this.unanswered++;
 		}else if (answer !== this.currentQuestion.answerText) {
 			//Show answer result as Nope! and show answer text
 			$("#answer-result").text("Nope!");
 			$("#answer-text").removeClass("d-none");
+			$("#answer-result").addClass("incorrect");
 			//increase incorrect counter
 			this.incorrect++;
 		}
 
 		//Show answer result as correct and hide answer text
-		if (answer === answerString) {
+		if (answer.toLowerCase() === answerString.toLowerCase()) {
 			$("#answer-result").text("Correct!");
 			$("#answer-text").addClass("d-none");
+			$("#answer-result").addClass("correct");
 			//update score counter
 			this.score++;
 			$("#score").text(this.score);

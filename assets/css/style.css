@@ -1,9 +1,7 @@
-html {
+/*html {
 	position: relative;
 	min-height: 100%;
-}
-
-
+}*/
 
 .background-page {
 	background: url("../images/toystory2.jpg") no-repeat center center fixed;
@@ -18,8 +16,8 @@ html {
 }
 
 .main-content {
-	background: rgba(245,255,250, 0.85);
-	border: 2px solid #82a7ca;
+	background: rgba(245, 255, 250, 0.85);
+	border: 3px solid #82a7ca;
 	margin-bottom: 80px;
 	margin-top: 5vh;
 	border-radius: 15px;
@@ -29,7 +27,7 @@ html {
 .page-title {
 	font-size: 3rem;
 	font-family: 'Encode Sans Semi Condensed', sans-serif;
-/*	color: #82a7ca;*/
+	/*	color: #82a7ca;*/
 }
 
 #game-start {
@@ -47,11 +45,30 @@ html {
 	cursor: pointer;
 }
 
-
-
 #counter-timer-row {
 	margin-bottom: 15px;
 	margin-top: 15px;
+}
+
+#score {
+	color: #82a7ca;
+	font-weight: bold;
+}
+
+.extra-large-text {
+	font-size: 32px;
+}
+
+.large-text {
+	font-size: 26px;
+}
+
+.medim-text {
+	font-size: 20px;
+}
+
+.trivia-question-col {
+	font-size: 24px;
 }
 
 .trivia-img {
@@ -66,16 +83,16 @@ html {
 	padding: 10px;
 }
 
-#trivia-question-answers li {
-	background: rgba(245,255,250, 1);
+.trivia-question-answer-item {
+	background: rgba(245, 255, 250, 1);
 	list-style: none;
 	text-align: center;
 	border: 1px solid #373D3F;
 	border-radius: 5px;
 	margin: 10px 0px 10px 0px;
 	height: 45px;
-	line-height: 45px;
-	font-size: 22px;
+	line-height: 40px;
+	text-transform: uppercase;
 }
 
 #trivia-question-answers li:hover {
@@ -83,13 +100,22 @@ html {
 	background: #ccdbe8;
 	border: 2px solid #82a7ca;
 	color: #ffffff;
-	/*background: rgba(138,145,69, 1);
-	color: rgb(245,255,250)*/
 }
 
-.footer-row {
-	/*	background-color: #474747;*/
-	background: rgba(245,255,250, 0.95);
+.correct {
+	color: green;
+}
+
+.incorrect {
+	color: red;
+}
+
+.unanswered {
+	color: #82a7ca;
+}
+
+/*.footer-row {
+	background: rgba(245, 255, 250, 0.95);
 	border-top: 2px solid #82a7ca;
 	margin-top: 20px;
 	font-size: 10px;
@@ -99,11 +125,11 @@ html {
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
-}
+}*/
 
-
+/*Use Media Queries to set width of game content
+*/
 @media (min-width: 576px) {
-
 	.container {
 		max-width: 440px;
 	}
@@ -111,7 +137,6 @@ html {
 
 
 @media (min-width: 768px) {
-
 	.container {
 		max-width: 520px;
 	}
@@ -124,50 +149,12 @@ html {
 	}
 }
 
+@media (max-width: 992px) {
+	.large-text {
+		font-size: 22px;
+	}
 
-/*@media (min-width: 992px)
-_grid.scss:18
-.container {
-    max-width: 960px;
-}
-
-@media (min-width: 768px)
-_grid.scss:18
-.container {
-    max-width: 720px;
-}
-@media (min-width: 576px)
-_grid.scss:18
-.container {
-    max-width: 540px;
-}*/
-
-
-/*@media screen and (min-width: 992px) {
-
-	.container {
-		max-width: 760px!important;
+	.medium-text {
+		font-size: 18px;
 	}
 }
-
-
-@media screen and (max-width: 992px) {
-
-	.container {
-		max-width: 760px!important;
-	}
-}
-
-@media screen and (max-width: 768px) {
-
-	.container {
-		max-width: 520px!important;
-	}
-}
-
-@media screen and (max-width: 576px) {
-
-	.container {
-		max-width: 520px!important;
-	}
-}*/
