@@ -8,25 +8,11 @@ Checkout my Pixar Trivia game!
 
 Start playing by visiting this link: https://frendon001.github.io/TriviaGame
 
-### Prerequisites
+* Select "Start Game" to begin
+* Answer the question before the time runs out.
 
-NA
+![Home Page](assets/images/TriviaGame.png)
 
-### Installing
-
-NA
-
-## Running the tests
-
-NA
-
-### And coding style tests
-
-NA
-
-## Deployment
-
-NA
 
 ## Built With
 
